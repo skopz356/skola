@@ -38,10 +38,10 @@ echo $head;
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        echo "<form id='update-form' action='update.php' method='post'>";
-                        echo "<textarea>".$row["kategorie"]."</textarea>";
-                        echo "<textarea>".$row["nadpis"]."</textarea>";
-                        echo "<textarea>".$row["text"]."</textarea>";
+                        echo "<form id='update-form' method='post'>";
+                        echo "<textarea name='kategorie'>".$row["kategorie"]."</textarea>";
+                        echo "<textarea name='nadpis'>".$row["nadpis"]."</textarea>";
+                        echo "<textarea name='text'>".$row["text"]."</textarea>";
                         echo "<input type='hidden' name='id' value='".$row["id"]."'"." >";
                         echo "<input type='submit'>";
                         echo "</form>";
@@ -58,9 +58,16 @@ echo $head;
             data: data
         });
         request.done(function(response){
-            location.reload();
+            if(response == "Succ"){
+                location.reload();
+            }
+            else{
+                alert("Response")
+            }
+            
             
         });
+    });
 
 
             </script>
