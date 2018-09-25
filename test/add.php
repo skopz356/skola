@@ -1,3 +1,5 @@
+<?php
+$conn = new mysqli("localhost", "root", "", "projekt");
 if (isset($_POST["kategorie"])){
     $kategorie = $_POST["kategorie"];
     $nadpis = $_POST["nadpis"];
@@ -9,8 +11,5 @@ if (isset($_POST["kategorie"])){
     } else {
         echo "Error updating record: " . mysqli_error($conn);
     }
-    
-
 }
-
 ?>

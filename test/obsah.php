@@ -12,7 +12,7 @@ $head = '<head>
 </head>';
 $menu='<div id="menu" class="menu">     
 <ul>
- <li><a href="#home">ÚVOD</a></li>
+ <li><a href="./">ÚVOD</a></li>
  <li><a href="clanky.php">Článek</a></li>
  <li><a href="#contact">STUDIUM</a></li>
  <li><a href="#about">SPORTOVNÍ GYMNÁZIUM</a></li>

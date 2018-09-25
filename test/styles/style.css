@@ -61,15 +61,11 @@ div.menu .active
 color: #A1D1EC;
 }
 
-.all
-{
-background-color: #FFFFFF;
-height: 800px;
-float:left;
-width: 760px;
-font-family: 'Roboto Condensed', sans-serif;
-padding-left: 20px;
-padding-right: 20px;
+
+
+section.main{
+    font-family: 'Roboto Condensed', sans-serif;
+    padding: 30px;
 }
 #odkazy
 {
@@ -89,3 +85,4 @@ height: 800px;
 #add-form{
     display: none;
 }
+

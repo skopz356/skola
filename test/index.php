@@ -14,7 +14,7 @@ echo $menu;
 ?>
 
 
-<section class="all">
+<section class="main">
 Vitejte Na stránkacgh
 </section>
 </body>

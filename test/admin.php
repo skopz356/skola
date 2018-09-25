@@ -40,30 +40,39 @@ echo $head;
                 $sql = "SELECT id,kategorie, nadpis, text  FROM prispevky";
                 $result = $conn->query($sql);         
                 if ($result->num_rows > 0) {
-                    // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        echo "<form id='update-form' method='post'>";
-                        echo "<textarea name='kategorie'>".$row["kategorie"]."</textarea>";
-                        echo "<textarea name='nadpis'>".$row["nadpis"]."</textarea>";
-                        echo "<textarea name='text'>".$row["text"]."</textarea>";
+                        echo "<form class='update-form' method='post'>";
+                        echo "<label for='kategorie'>Kategorie</label>";
+                        echo "<textarea name='kategorie'>".$row["kategorie"]."</textarea><br>";
+                        echo "<label for='nadpis'>Nadpis</label>";
+                        echo "<textarea name='nadpis'>".$row["nadpis"]."</textarea><br>";
+                        echo "<textarea name='text'>".$row["text"]."</textarea><br>";
                         echo "<input type='hidden' name='id' value='".$row["id"]."'"." >";
-                        echo "<input type='submit'>";
+                        echo "<input type='submit' value='Upravit'>";
+                        echo "</form>";
+                        echo "<form class='delete-form' method='post'>";
+                        echo "<input type='hidden' name='id' value='".$row["id"]."'>";
+                        echo "<input type='submit' value='Odstranit'>";
                         echo "</form>";
                     }
                 }
                 
 
             }?>
+            
             <button class='pridat'>Pridat Clanek</button>
             <form id='add-form'>
-                <textarea name="kategorie"></textarea>
-                <textarea name="nadpis"></textarea>
+                <label for="kategorie">Kategorie</label>
+                <input name="kategorie"><br>
+                <label for="nadpis">Nadpis</label>
+                <input name="nadpis"><br>
                 <textarea name="text"></textarea>
-                <input type="submit" value="Odeslat">
+                <input type="submit" value="Přidat">
             </form>
 
             <script>
-                $('#update-form').submit(function(event){
+                $('#form').toggle();
+                $('.update-form').submit(function(event){
                     event.preventDefault();
                     data = $(this).serialize();
                     var request = $.ajax({
@@ -97,7 +106,24 @@ echo $head;
                             location.reload();
                         }
                         else{
-                            alert("Response")
+                            alert(response)
+                        }
+                    });
+                });
+                $('.delete-form').submit(function(event){
+                    event.preventDefault();
+                    data = $(this).serialize();
+                    var request = $.ajax({
+                    url: "delete.php",
+                    type: "POST",
+                    data: data
+                });
+                    request.done(function(response){
+                        if(response == "Succ"){
+                            location.reload();
+                        }
+                        else{
+                            alert(response)
                         }
                     });
                 });

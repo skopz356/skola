@@ -8,7 +8,7 @@ echo $head;
 <?php
 echo $header;
 echo $menu;
-
+echo "<section class='main'>";
 $conn = new mysqli("localhost", "root", "", "projekt");
 $sql = "SELECT kategorie, nadpis, text FROM prispevky";
 $result = $conn->query($sql);
@@ -25,6 +25,7 @@ if ($result->num_rows > 0) {
     }
     echo '</div>';
     echo '</div>';
+    echo '</section>';
 }
 ?>
 </section>
