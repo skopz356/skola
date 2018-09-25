@@ -34,6 +34,7 @@ echo $head;
         });
         </script>
         <?php
+        $cisla = ["Prvni", "Druhy", "Treti", "Ctvrty"];
         $conn = new mysqli("localhost", "root", "", "projekt");
         if(isset($_SESSION["login"])){
             if($_SESSION["login"] == TRUE){
@@ -41,6 +42,7 @@ echo $head;
                 $result = $conn->query($sql);         
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
+                        echo "<h3>".$cisla[$row["id"]-1]." článek<h3>";
                         echo "<form class='update-form' method='post'>";
                         echo "<label for='kategorie'>Kategorie</label>";
                         echo "<textarea name='kategorie'>".$row["kategorie"]."</textarea><br>";
