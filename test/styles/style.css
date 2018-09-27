@@ -86,3 +86,37 @@ height: 800px;
     display: none;
 }
 
+.pridat{
+    position: sticky;
+    top:0;
+    right: 0;
+    
+}
+
+body{
+    position: relative;
+}
+
+.update-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-update{
+    margin-bottom: 30px;
+}
+
+.delete-form input{
+    background-color: red;
+}
+
+.pridat{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#add-form{
+    position: absolute;
+    top: 30px;
+}

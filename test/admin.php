@@ -34,15 +34,19 @@ echo $head;
         });
         </script>
         <?php
-        $cisla = ["Prvni", "Druhy", "Treti", "Ctvrty"];
+        $cisla = ["Prvni", "Druhy", "Treti", "Ctvrty", "Paty", "Sesty"];
         $conn = new mysqli("localhost", "root", "", "projekt");
         if(isset($_SESSION["login"])){
             if($_SESSION["login"] == TRUE){
                 $sql = "SELECT id,kategorie, nadpis, text  FROM prispevky";
                 $result = $conn->query($sql);         
                 if ($result->num_rows > 0) {
+                    echo "<div class='container'>";
+                    echo "<div class='row'>";
+                    $i = 0;
                     while($row = $result->fetch_assoc()) {
-                        echo "<h3>".$cisla[$row["id"]-1]." článek<h3>";
+                        echo "<article class='col-lg-4 form-update'>";
+                        echo "<h3>".$cisla[$i]."</h3>";
                         echo "<form class='update-form' method='post'>";
                         echo "<label for='kategorie'>Kategorie</label>";
                         echo "<textarea name='kategorie'>".$row["kategorie"]."</textarea><br>";
@@ -56,7 +60,11 @@ echo $head;
                         echo "<input type='hidden' name='id' value='".$row["id"]."'>";
                         echo "<input type='submit' value='Odstranit'>";
                         echo "</form>";
+                        echo "</article>";
+                        $i++;
                     }
+                    echo "</div>";
+                    echo "</div>";
                 }
                 
 
