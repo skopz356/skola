@@ -69,7 +69,7 @@ echo $head;
                 
 
             }?>
-            
+            <a href="./" class="a-home">Domu</a>
             <button class='pridat'>Pridat Clanek</button>
             <form id='add-form'>
                 <label for="kategorie">Kategorie</label>
