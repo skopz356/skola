@@ -38,8 +38,10 @@ echo $head;
         $conn = new mysqli("localhost", "root", "", "projekt");
         if(isset($_SESSION["login"])){
             if($_SESSION["login"] == TRUE){
-                $sql = "SELECT id,kategorie, nadpis, text  FROM prispevky";
-                $result = $conn->query($sql);         
+                $sql = "SELECT id, nadpis, text  FROM prispevky";
+                $sql_cat = "SELECT kategorie FROM prispevky";
+                $result = $conn->query($sql);
+                $result_cat = $conn->query($sql_cat);         
                 if ($result->num_rows > 0) {
                     echo "<div class='container'>";
                     echo "<div class='row'>";
@@ -49,7 +51,11 @@ echo $head;
                         echo "<h3>".$cisla[$i]."</h3>";
                         echo "<form class='update-form' method='post'>";
                         echo "<label for='kategorie'>Kategorie</label>";
-                        echo "<textarea name='kategorie'>".$row["kategorie"]."</textarea><br>";
+                        echo "<select>";
+                        while($row_cat = $result_cat->fetch_assoc()){
+                            echo "<option>".$row_cat["kategorie"]."</option>";
+                        }
+                        echo "</select>";
                         echo "<label for='nadpis'>Nadpis</label>";
                         echo "<textarea name='nadpis'>".$row["nadpis"]."</textarea><br>";
                         echo "<textarea name='text'>".$row["text"]."</textarea><br>";
@@ -69,7 +75,7 @@ echo $head;
                 
 
             }?>
-            <a href="./" class="a-home">Domu</a>
+            <a href="./" class="btn btn-dark a-home">Domu</a>
             <button class='pridat'>Pridat Clanek</button>
             <form id='add-form'>
                 <label for="kategorie">Kategorie</label>
