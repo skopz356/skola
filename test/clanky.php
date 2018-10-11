@@ -9,7 +9,7 @@ echo $head;
 echo $header;
 echo $menu;
 echo "<section class='main'>";
-$conn = new mysqli("localhost", "root", "", "projekt");
+require_once "conn.php";
 $sql = "SELECT kategorie, nadpis, text FROM prispevky";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {

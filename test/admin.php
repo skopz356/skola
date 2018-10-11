@@ -34,14 +34,17 @@ echo $head;
         });
         </script>
         <?php
+        require_once "conn.php";
+        require_once "fun.php";
         $cisla = ["Prvni", "Druhy", "Treti", "Ctvrty", "Paty", "Sesty"];
-        $conn = new mysqli("localhost", "root", "", "projekt");
         if(isset($_SESSION["login"])){
             if($_SESSION["login"] == TRUE){
-                $sql = "SELECT id, nadpis, text  FROM prispevky";
-                $sql_cat = "SELECT kategorie FROM prispevky";
+                $sql = "SELECT id, titulek, obsah  FROM prispevky";
                 $result = $conn->query($sql);
-                $result_cat = $conn->query($sql_cat);         
+                $sql_cat = "SELECT id, title FROM kategorie";
+                $result_cat = $conn->query($sql_cat); 
+                $result_array = cat_array();
+                
                 if ($result->num_rows > 0) {
                     echo "<div class='container'>";
                     echo "<div class='row'>";
@@ -51,14 +54,14 @@ echo $head;
                         echo "<h3>".$cisla[$i]."</h3>";
                         echo "<form class='update-form' method='post'>";
                         echo "<label for='kategorie'>Kategorie</label>";
-                        echo "<select>";
-                        while($row_cat = $result_cat->fetch_assoc()){
-                            echo "<option>".$row_cat["kategorie"]."</option>";
+                        echo "<select name='kategorie'>";
+                        for($i = 0; $i < count($result_array); $i++){
+                            echo "<option>".$result_array[$i]["title"]."</option>";
                         }
                         echo "</select>";
                         echo "<label for='nadpis'>Nadpis</label>";
-                        echo "<textarea name='nadpis'>".$row["nadpis"]."</textarea><br>";
-                        echo "<textarea name='text'>".$row["text"]."</textarea><br>";
+                        echo "<textarea name='nadpis'>".$row["titulek"]."</textarea><br>";
+                        echo "<textarea name='text'>".$row["obsah"]."</textarea><br>";
                         echo "<input type='hidden' name='id' value='".$row["id"]."'"." >";
                         echo "<input type='submit' value='Upravit'>";
                         echo "</form>";
@@ -79,10 +82,16 @@ echo $head;
             <button class='pridat'>Pridat Clanek</button>
             <form id='add-form'>
                 <label for="kategorie">Kategorie</label>
-                <input name="kategorie"><br>
-                <label for="nadpis">Nadpis</label>
-                <input name="nadpis"><br>
-                <textarea name="text"></textarea>
+                <select name="kategorie_id">
+                <?php 
+                while($row_cat = $result_cat -> fetch_assoc()){
+                    echo '<option value="'.$row_cat["id"].'">'.$row_cat["title"].'</option>';
+                }
+                ?>
+                </select><br>
+                <label for="titulek">Nadpis</label>
+                <input name="titulek"><br>
+                <textarea name="obsah"></textarea>
                 <input type="submit" value="Přidat">
             </form>
 
