@@ -39,12 +39,11 @@ echo $head;
         $cisla = ["Prvni", "Druhy", "Treti", "Ctvrty", "Paty", "Sesty"];
         if(isset($_SESSION["login"])){
             if($_SESSION["login"] == TRUE){
-                $sql = "SELECT id, titulek, obsah  FROM prispevky";
+                $sql = "SELECT id, titulek, obsah, kat_id  FROM prispevky";
                 $result = $conn->query($sql);
-                $sql_cat = "SELECT id, title FROM kategorie";
+                $sql_cat = "SELECT id, title, kategorie FROM kategorie";
                 $result_cat = $conn->query($sql_cat); 
                 $result_array = cat_array();
-                
                 if ($result->num_rows > 0) {
                     echo "<div class='container'>";
                     echo "<div class='row'>";
@@ -54,9 +53,9 @@ echo $head;
                         echo "<h3>".$cisla[$i]."</h3>";
                         echo "<form class='update-form' method='post'>";
                         echo "<label for='kategorie'>Kategorie</label>";
-                        echo "<select name='kategorie'>";
-                        for($i = 0; $i < count($result_array); $i++){
-                            echo "<option>".$result_array[$i]["title"]."</option>";
+                        echo "<select name='kat_id'>";
+                        for($d = 0; $d < count($result_array); $d++){
+                            echo '<option value="'.$result_array[$d]["id"].'"'.(($d+1 == $row["kat_id"] )?'selected="selected"':"").'>'.$result_array[$d]["title"]."</option>";
                         }
                         echo "</select>";
                         echo "<label for='nadpis'>Nadpis</label>";
@@ -84,14 +83,20 @@ echo $head;
                 <label for="kategorie">Kategorie</label>
                 <select name="kategorie_id">
                 <?php 
-                while($row_cat = $result_cat -> fetch_assoc()){
-                    echo '<option value="'.$row_cat["id"].'">'.$row_cat["title"].'</option>';
+                for($d = 0; $d < count($result_array); $d++){
+                    echo '<option value="'.$result_array[$d]["id"].'">'.$result_array[$d]["title"].'</option>';
                 }
                 ?>
                 </select><br>
                 <label for="titulek">Nadpis</label>
                 <input name="titulek"><br>
                 <textarea name="obsah"></textarea>
+                <input type="submit" value="Přidat">
+            </form>
+
+            <button class='pridat'>Pridat Clanek</button>
+            <form id='add-form-cat'>
+                <input type="text" name="kat_title" placeholder="Jmeno">
                 <input type="submit" value="Přidat">
             </form>
 
@@ -110,7 +115,7 @@ echo $head;
                             location.reload();
                         }
                         else{
-                            alert("Response")
+                            alert(response);
                         }
                     });
                 });
@@ -118,7 +123,11 @@ echo $head;
                         $('#add-form').toggle();
 
                 });
-                $('#add-form').submit(function(event){
+                $('.pridat-cat').click(function(){
+                        $('#add-form-cat').toggle();
+
+                });
+                $('#add-form, #add-form-cat').submit(function(event){
                     event.preventDefault();
                     data = $(this).serialize();
                     var request = $.ajax({
@@ -151,6 +160,10 @@ echo $head;
                             alert(response)
                         }
                     });
+                });
+                $('.add-category').click(function(event){
+                    event.preventDefault();
+
                 });
             </script>
 

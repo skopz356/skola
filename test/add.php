@@ -12,5 +12,13 @@ if (isset($_POST["kategorie_id"])){
         echo "Error updating record: " . mysqli_error($conn);
        
 }
+}else
+$kat_title = $_POST["kat_title"];
+ $sql = "INSERT INTO kategorie(title) VALUES ('$kat_title')";
+ if (mysqli_query($conn, $sql)) {
+    echo "Succ";
+} else {
+    echo "Error updating record: " . mysqli_error($conn);
+   
 }
 ?>
