@@ -1,5 +1,7 @@
 
 <?php
+require_once "conn.php";
+require_once "fun.php";
 include "obsah.php";
 echo $head;
 ?>
@@ -10,23 +12,50 @@ echo $header;
 echo $menu;
 echo "<section class='main'>";
 require_once "conn.php";
-$sql = "SELECT kategorie, nadpis, text FROM prispevky";
+require_once "fun.php";
+$sql = "SELECT titulek, obsah FROM prispevky";
 $result = $conn->query($sql);
+$result_array = cat_array();
 if ($result->num_rows > 0) {
-    // output data of each row
     echo "<div class='container'>";
-    echo "<div class='row'>";
-    while($row = $result->fetch_assoc()) {
-        echo '<article class="col-lg-4 clanek">';
-        echo "<div><span class='bold'> Kategorie:</span>"." ".$row["kategorie"]."</div>";
-        echo "<h1>".$row["nadpis"]."</h1>";
-        echo "<div>".$row["text"]."</div>";
-        echo '</article>';
+    
+    echo '<select id="kat_select">';
+    for($i = 0; $i < count($result_array); $i++){
+
+    echo '<option value="'.$result_array[$i]["id"].'">'.$result_array[$i]["title"].'</option>';
     }
+
+    echo "</select>";
+    echo '<div class="row articles">';
+        while($row = $result->fetch_assoc()) {
+            echo '<article class="col-lg-4 clanek">';
+            // echo "<div><span class='bold'> Kategorie:</span>"." ".$row["kategorie"]."</div>";
+            echo "<h1>".$row["titulek"]."</h1>";
+            echo "<div>".$row["obsah"]."</div>";
+            echo '</article>';
+        }
+    echo "</div>";
+    
     echo '</div>';
-    echo '</div>';
+    
     echo '</section>';
 }
 ?>
 </section>
+<script>
+$('#kat_select').change(function(){
+    var ajaxRequest;
+    console.log("asdas");
+    ajaxRequest = $.ajax({
+        url: "sel_article.php",
+        type: "post",
+        data: "option=" + $(this).find(":selected").val(),
+        success: function(response){
+            jQuery(".articles").html(response);
+        }
+    })
+   
+});
+
+</script>
 </body>
