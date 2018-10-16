@@ -1,0 +1,128 @@
+body
+{
+background: rgb(51,204,255);   
+}
+
+#cele
+{  
+margin: 0 auto;
+width: 1100px;
+border-left: 5px solid #FFFFFF;
+border-right: 5px solid #FFFFFF;
+}
+
+.header
+{
+border-top: 5px solid #FFFFFF;
+font-family: 'Roboto Condensed', sans-serif;
+background-image: url("./header.png");
+height: 200px;
+color: #FFFFFF;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.header img
+{
+float:left;
+}
+
+#menu
+{
+    height: 25px;
+background-color: #0A2B38;
+padding-top: 7px;
+}
+ div.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0A2B38  ;
+}
+
+div.menu li {
+    float: left;
+    border-right: 1px dotted #FFFFFF;
+}
+
+div.menu li a {
+    color: #FFFFFF;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+div.menu li a:hover {
+    color:#A1D1EC;
+}
+div.menu .active
+{
+color: #A1D1EC;
+}
+
+
+
+section.main{
+    font-family: 'Roboto Condensed', sans-serif;
+    padding: 30px;
+}
+#odkazy
+{
+background-color: #0A2B38;
+float:left;
+width: 300px;
+height: 800px;
+}
+.bold{
+    font-weight: 800;
+}
+
+.notification{
+    display: none;
+}
+
+#add-form{
+    display: none;
+}
+
+.pridat{
+    position: sticky;
+    top:0;
+    right: 0;
+    
+}
+
+body{
+    position: relative;
+}
+
+.update-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-update{
+    margin-bottom: 30px;
+}
+
+.delete-form input{
+    background-color: red;
+}
+
+.pridat{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#add-form{
+    position: absolute;
+    top: 30px;
+}
+
+.a-home{
+    position: absolute;
+    top: 0;
+    right: 100px;
+}
