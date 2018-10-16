@@ -8,6 +8,7 @@ $head = '<head>
 <title>Document</title>
 <script src="jquery.js"></script>
 <link rel="stylesheet" href="styles/style.css">
+<script src="script.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 </head>';
 $menu='<div id="menu" class="menu">     

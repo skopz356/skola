@@ -55,7 +55,7 @@ echo $head;
                         echo "<label for='kategorie'>Kategorie</label>";
                         echo "<select name='kat_id'>";
                         for($d = 0; $d < count($result_array); $d++){
-                            echo '<option value="'.$result_array[$d]["id"].'"'.(($d+1 == $row["kat_id"] )?'selected="selected"':"").'>'.$result_array[$d]["title"]."</option>";
+                            echo '<option value="'.$result_array[$d]["id"].'"'.(($result_array[$d]["id"] == $row["kat_id"] )?'selected="selected"':"").'>'.$result_array[$d]["title"]."</option>";                            
                         }
                         echo "</select>";
                         echo "<label for='nadpis'>Nadpis</label>";
@@ -79,7 +79,7 @@ echo $head;
             }?>
             <a href="./" class="btn btn-dark a-home">Domu</a>
             <button class='pridat'>Pridat Clanek</button>
-            <form id='add-form'>
+            <form class='add-form' id="add-form">
                 <label for="kategorie">Kategorie</label>
                 <select name="kategorie_id">
                 <?php 
@@ -95,21 +95,22 @@ echo $head;
             </form>
 
             <button class='pridat'>Pridat Clanek</button>
-            <form id='add-form-cat'>
+            <form class='add-form' id="add-form-cat">
                 <input type="text" name="kat_title" placeholder="Jmeno">
                 <input type="submit" value="Přidat">
             </form>
+            
 
             <script>
-                $('#form').toggle();
-                $('.update-form').submit(function(event){
+                $('form').submit(function(event){
+                    console.log($(this).attr("class") + ".php");
                     event.preventDefault();
                     data = $(this).serialize();
                     var request = $.ajax({
-                    url: "update.php",
+                    url: $(this).attr("class") + ".php",
                     type: "POST",
                     data: data
-                });
+                    });
                     request.done(function(response){
                         if(response == "Succ"){
                             location.reload();
@@ -118,54 +119,22 @@ echo $head;
                             alert(response);
                         }
                     });
+
+                    
                 });
+                $('#form').toggle();
                 $('.pridat').click(function(){
                         $('#add-form').toggle();
-
                 });
                 $('.pridat-cat').click(function(){
                         $('#add-form-cat').toggle();
-
-                });
-                $('#add-form, #add-form-cat').submit(function(event){
-                    event.preventDefault();
-                    data = $(this).serialize();
-                    var request = $.ajax({
-                    url: "add.php",
-                    type: "POST",
-                    data: data
-                });
-                    request.done(function(response){
-                        if(response == "Succ"){
-                            location.reload();
-                        }
-                        else{
-                            alert(response)
-                        }
-                    });
-                });
-                $('.delete-form').submit(function(event){
-                    event.preventDefault();
-                    data = $(this).serialize();
-                    var request = $.ajax({
-                    url: "delete.php",
-                    type: "POST",
-                    data: data
-                });
-                    request.done(function(response){
-                        if(response == "Succ"){
-                            location.reload();
-                        }
-                        else{
-                            alert(response)
-                        }
-                    });
                 });
                 $('.add-category').click(function(event){
                     event.preventDefault();
 
                 });
             </script>
+            
 
 
 

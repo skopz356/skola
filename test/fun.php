@@ -8,7 +8,7 @@ function mysqli_result($res, $row, $field=0) {
 
 
 function cat_array(){
-    $conn = new mysqli("localhost", "root", "mysql" , "projekt");
+    $conn = new mysqli("localhost", "skoladatabase", "79da46ta13ba" , "skoladatabase");
     $sql = "SELECT id, title FROM kategorie";
     $r = $conn->query($sql);
     $result = array();
