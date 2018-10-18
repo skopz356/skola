@@ -103,7 +103,6 @@ echo $head;
 
             <script>
                 $('form').submit(function(event){
-                    console.log($(this).attr("class") + ".php");
                     event.preventDefault();
                     data = $(this).serialize();
                     var request = $.ajax({
