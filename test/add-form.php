@@ -7,7 +7,7 @@ if (isset($_POST["kategorie_id"])){
     
     $sql = "INSERT INTO prispevky (titulek, obsah, kat_id) VALUES('$titulek','$obsah', (SELECT id FROM kategorie WHERE id=$kategorie_id))";
     if (mysqli_query($conn, $sql)) {
-        echo $sql;
+        echo "Succ";
     } else {
         echo "Error updating record: " . mysqli_error($conn);
        
