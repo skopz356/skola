@@ -99,6 +99,13 @@ echo $head;
                 <input type="text" name="kat_title" placeholder="Jmeno">
                 <input type="submit" value="Přidat">
             </form>
+            <select>
+            <?php 
+            for($d = 0; $d < count($result_array); $d++){
+                echo '<option value="'.$result_array[$d]["id"].'">'.$result_array[$d]["title"].'</option>';
+            }
+            ?>
+            </select>
             
 
             <script>
